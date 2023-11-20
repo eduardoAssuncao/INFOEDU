@@ -6,22 +6,17 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Todo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+	@GeneratedValue(strategy = GenerationType.AUTO)
     private UUID todoId;
     private String nome;
     private String descricao;
     private boolean realizado;
     private int prioridade;
-    @ManyToOne
-    private User user;
-
-    public Todo(){}
 
     public Todo(String nome, String descricao, boolean realizado, int prioridade) {
         this.nome = nome;
