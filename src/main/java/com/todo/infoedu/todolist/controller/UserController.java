@@ -22,8 +22,12 @@ import com.todo.infoedu.todolist.service.UserService;
 public class UserController {
 
     //Injeção de dependência
-    @Autowired
+    //@Autowired
     UserService userService;
+
+    public UserController (UserService userService){
+        this.userService = userService;
+    }
 
     @GetMapping
     List<User> getAllUsers(){

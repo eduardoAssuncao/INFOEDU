@@ -11,7 +11,7 @@ import jakarta.persistence.Id;
 public class Todo {
 
     @Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.UUID)
     private UUID todoId;
     private String nome;
     private String descricao;

@@ -23,8 +23,12 @@ public class TodoController {
 
     //injeção de dependências
     //injeção por meio do Autowired
-    @Autowired
+    //@Autowired
     private TodoService todoService;
+
+    public TodoController(TodoService todoService){
+        this.todoService = todoService;
+    }
 
     //path e requisições
     @GetMapping()
