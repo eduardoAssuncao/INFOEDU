@@ -10,21 +10,21 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Category {
+public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID categoryId;
+    private UUID CategoriaId;
     private String nome;
     private String descricao;
-    @OneToMany(mappedBy = "category")
-    private List<Todo> todos;
+    @OneToMany(mappedBy = "Categoria")
+    private List<Pendencia> Pendencias;
 
-    
-    public UUID getCategoryId() {
-        return categoryId;
+
+    public UUID getCategoriaId() {
+        return CategoriaId;
     }
-    public void setCategoryId(UUID categoryId) {
-        this.categoryId = categoryId;
+    public void setCategoriaId(UUID CategoriaId) {
+        this.CategoriaId = CategoriaId;
     }
     public String getNome() {
         return nome;
@@ -38,12 +38,10 @@ public class Category {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    public List<Todo> getTodos() {
-        return todos;
+    public List<Pendencia> getPendencias() {
+        return Pendencias;
     }
-    public void setTodos(List<Todo> todos) {
-        this.todos = todos;
+    public void setPendencias(List<Pendencia> Pendencias) {
+        this.Pendencias = Pendencias;
     }
-
-    
 }

@@ -10,21 +10,21 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 
 @Entity
-public class Tag {
+public class Etiqueta {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID tagId;
+    private UUID EtiquetaId;
     private String nome;
     private String cor;
-    @ManyToMany(mappedBy = "tags")
-    private List<Todo> todos;
+    @ManyToMany(mappedBy = "Etiquetas")
+    private List<Pendencia> Pendencias;
 
 
-    public UUID getTagId() {
-        return tagId;
+    public UUID getEtiquetaId() {
+        return EtiquetaId;
     }
-    public void setTagId(UUID tagId) {
-        this.tagId = tagId;
+    public void setEtiquetaId(UUID EtiquetaId) {
+        this.EtiquetaId = EtiquetaId;
     }
     public String getNome() {
         return nome;
@@ -38,10 +38,10 @@ public class Tag {
     public void setCor(String cor) {
         this.cor = cor;
     }
-    public List<Todo> getTodos() {
-        return todos;
+    public List<Pendencia> getPendencias() {
+        return Pendencias;
     }
-    public void setTodos(List<Todo> todos) {
-        this.todos = todos;
+    public void setPendencias(List<Pendencia> Pendencias) {
+        this.Pendencias = Pendencias;
     } 
 }

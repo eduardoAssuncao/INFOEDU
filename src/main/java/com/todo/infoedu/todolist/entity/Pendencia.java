@@ -12,34 +12,34 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Todo {
+public class Pendencia {
 
     @Id
 	@GeneratedValue(strategy = GenerationType.UUID)
-    private UUID todoId;
+    private UUID PendenciaId;
     private String nome;
     private String descricao;
     private boolean realizado;
     private int prioridade;
     @ManyToOne
-    @JoinColumn(name="userId", nullable=false)
-    private User user;
+    @JoinColumn(name="UsuarioId", nullable=false)
+    private Usuario Usuario;
     @ManyToOne
-    private Category category;
+    private Categoria Categoria;
     @ManyToMany
-    private List<Tag> tags;
+    private List<Etiqueta> Etiquetas;
     
-    public Todo(){}
+    public Pendencia(){}
 
-    public Todo(String nome, String descricao, boolean realizado, int prioridade) {
+    public Pendencia(String nome, String descricao, boolean realizado, int prioridade) {
         this.nome = nome;
         this.descricao = descricao;
         this.realizado = realizado;
         this.prioridade = prioridade;
     }
 
-    public UUID getTodoId() {
-        return todoId;
+    public UUID getPendenciaId() {
+        return PendenciaId;
     }
 
     public String getNome() {
@@ -74,7 +74,7 @@ public class Todo {
         this.prioridade = prioridade;
     }
 
-    public void setTodoId(UUID todoId) {
-        this.todoId = todoId;
+    public void setPendenciaId(UUID PendenciaId) {
+        this.PendenciaId = PendenciaId;
     }
 }
