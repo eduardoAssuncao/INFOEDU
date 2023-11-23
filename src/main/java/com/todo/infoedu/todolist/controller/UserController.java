@@ -40,7 +40,7 @@ public class UserController {
     }
 
     @PostMapping
-    List<User> create(@RequestBody User user){
+    User create(@RequestBody User user){
         return userService.create(user);
     }
 

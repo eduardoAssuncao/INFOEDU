@@ -18,7 +18,7 @@ import com.todo.infoedu.todolist.entity.Todo;
 import com.todo.infoedu.todolist.service.TodoService;
 
 @RestController
-@RequestMapping("/todos")
+@RequestMapping("/users/todos")
 public class TodoController {
 
     //injeção de dependências
