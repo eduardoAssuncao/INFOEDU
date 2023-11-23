@@ -20,8 +20,9 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User create(User user){
-        return userRepository.save(user);
+    public List<User> create(User user){
+        userRepository.save(user);
+        return list();
     }
 
     public List<User> list(){

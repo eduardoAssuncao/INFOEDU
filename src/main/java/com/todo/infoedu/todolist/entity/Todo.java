@@ -1,5 +1,6 @@
 package com.todo.infoedu.todolist.entity;
 
+import java.util.List;
 import java.util.UUID;
 
 import jakarta.persistence.Entity;
@@ -7,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -22,7 +24,11 @@ public class Todo {
     @ManyToOne
     @JoinColumn(name="userId", nullable=false)
     private User user;
-
+    @ManyToOne
+    private Category category;
+    @ManyToMany
+    private List<Tag> tags;
+    
     public Todo(){}
 
     public Todo(String nome, String descricao, boolean realizado, int prioridade) {
