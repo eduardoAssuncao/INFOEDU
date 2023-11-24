@@ -18,7 +18,7 @@ import com.todo.infoedu.todolist.entity.Pendencia;
 import com.todo.infoedu.todolist.servico.ServicoPendencia;
 
 @RestController
-@RequestMapping("/usuarios/Pendencias")
+@RequestMapping("/usuarios/pendencias")
 public class ControladorPendencia {
 
     //injeção de dependências
@@ -36,26 +36,26 @@ public class ControladorPendencia {
         return pendenciaService.list();
     }
 
-    @GetMapping("{UUID}")
-    Optional<Pendencia> getPendencia(@PathVariable("UUID") UUID PendenciaId){
-        return pendenciaService.list(PendenciaId);
+    @GetMapping("{pendenciaId}")
+    Optional<Pendencia> getPendencia(@PathVariable("pendenciaId") UUID pendenciaId){
+        return pendenciaService.list(pendenciaId);
     }
 
     //path e requisições
     @PostMapping
-    List<Pendencia> create(@RequestBody Pendencia Pendencia){
-        return pendenciaService.create(Pendencia);
+    List<Pendencia> create(@RequestBody Pendencia pendencia){
+        return pendenciaService.create(pendencia);
     } 
 
     //path e requisições
-    @PutMapping("{PendenciaId}")
-    List<Pendencia> update(@PathVariable("PendenciaId") UUID PendenciaId, @RequestBody Pendencia Pendencia){
-        return pendenciaService.update(Pendencia);
+    @PutMapping("{pendenciaId}")
+    List<Pendencia> update(@PathVariable("pendenciaId") UUID pendenciaId, @RequestBody Pendencia pendencia){
+        return pendenciaService.update(pendencia);
     }
 
     //path e requisições
-    @DeleteMapping("{PendenciaId}")
-    List<Pendencia> delete(@PathVariable("id") UUID PendenciaId){
-        return pendenciaService.delete(PendenciaId);
+    @DeleteMapping("{pendenciaId}")
+    List<Pendencia> delete(@PathVariable("id") UUID pendenciaId){
+        return pendenciaService.delete(pendenciaId);
     }
 }

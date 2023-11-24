@@ -5,6 +5,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +20,7 @@ import com.todo.infoedu.todolist.entity.Usuario;
 import com.todo.infoedu.todolist.servico.ServicoUsuario;
 
 @RestController
-@RequestMapping("/Usuarios")
+@RequestMapping("/usuarios")
 public class ControladorUsuario {
 
     //Injeção de dependência
@@ -30,27 +32,35 @@ public class ControladorUsuario {
     }
 
     @GetMapping
-    List<Usuario> getAllUsuarios(){
-        return usuarioService.list(); 
+    public ResponseEntity<List<Usuario>> getAllUsuarios(){
+        List<Usuario> usuarios = usuarioService.list();
+        return new ResponseEntity<>(usuarios, HttpStatus.OK); 
     }
 
-    @GetMapping("{UsuarioId}")
-     Optional<Usuario> getUsuario(@PathVariable("UsuarioId") UUID UsuarioId){
-        return usuarioService.list(UsuarioId);
+    @GetMapping("/{usuarioId}")
+     public ResponseEntity<Usuario> getUsuarioById(@PathVariable UUID usuarioId){
+        Optional<Usuario> usuario = usuarioService.list(usuarioId);
+        return usuario.map(valor -> new ResponseEntity<>(valor, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping
-    List<Usuario> create(@RequestBody Usuario Usuario){
-        return usuarioService.create(Usuario);
+    public ResponseEntity<Usuario> create(@RequestBody Usuario usuario){
+        Usuario criarUsuario = usuarioService.create(usuario);
+        return new ResponseEntity<>(criarUsuario, HttpStatus.CREATED);
     }
 
-    @PutMapping("{UsuarioId}")
-    List<Usuario> update(@PathVariable("UsuarioId") UUID UsuarioId, @RequestBody Usuario Usuario){
-        return usuarioService.update(Usuario);
+    @PutMapping("/{usuarioId}")
+    public ResponseEntity<Usuario> update(@PathVariable UUID usuarioId, @RequestBody Usuario usuarioAtualizado){
+        Usuario usuario = usuarioService.update(usuarioId, usuarioAtualizado);
+        return (usuario != null)
+                ? new ResponseEntity<>(usuario, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @DeleteMapping("{UsuarioId}")
-    List<Usuario> delete(@PathVariable("UsuarioId") UUID UsuarioId){
-        return usuarioService.delete(UsuarioId);
+    @DeleteMapping("{usuarioId}")
+    public ResponseEntity<Void> delete(@PathVariable UUID usuarioId){
+        usuarioService.delete(usuarioId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

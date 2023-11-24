@@ -16,8 +16,8 @@ public class ServicoCategoria {
     @Autowired
     RepositorioCategoria categoriaRepository;
 
-    public List<Categoria> create(Categoria Categoria){
-        categoriaRepository.save(Categoria);
+    public List<Categoria> create(Categoria categoria){
+        categoriaRepository.save(categoria);
         return list();
     }
 
@@ -25,17 +25,17 @@ public class ServicoCategoria {
         return categoriaRepository.findAll();
     }
 
-    public Optional<Categoria> list(UUID CategoriaId){
-        return categoriaRepository.findById(CategoriaId);
+    public Optional<Categoria> list(UUID categoriaId){
+        return categoriaRepository.findById(categoriaId);
     }
 
-    public List<Categoria> update(Categoria Categoria){
-        categoriaRepository.save(Categoria);
+    public List<Categoria> update(Categoria categoria){
+        categoriaRepository.save(categoria);
         return list();
     }
 
-    public List<Categoria> delete(UUID CategoriaId){
-        categoriaRepository.deleteById(CategoriaId);
+    public List<Categoria> delete(UUID categoriaId){
+        categoriaRepository.deleteById(categoriaId);
         return list();
     }
 }

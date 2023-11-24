@@ -20,26 +20,28 @@ public class ServicoUsuario {
         this.usuarioRepository = usuarioRepository;
     }
 
-    public List<Usuario> create(Usuario Usuario){
-        usuarioRepository.save(Usuario);
-        return list();
+    public Usuario create(Usuario usuario){
+        return usuarioRepository.save(usuario);
     }
 
     public List<Usuario> list(){
         return usuarioRepository.findAll();
     }
 
-    public Optional<Usuario> list(UUID UsuarioId){
-        return usuarioRepository.findById(UsuarioId);
+    public Optional<Usuario> list(UUID usuarioId){
+        return usuarioRepository.findById(usuarioId);
     }
 
-    public List<Usuario> update(Usuario Usuario){
-        usuarioRepository.save(Usuario);
-        return list();
+    public Usuario update(UUID usuarioId, Usuario usuarioAtualizado){
+        return usuarioRepository.findById(usuarioId)
+                .map(usuario -> {
+                    usuario.setUsuarioName(usuarioAtualizado.getUsuarioName());
+                    return usuarioRepository.save(usuario);
+                })
+                .orElse(null);
     }
 
-    public List<Usuario> delete(UUID UsuarioId){
-        usuarioRepository.deleteById(UsuarioId);;
-        return list();
+    public void delete(UUID usuarioId){
+        usuarioRepository.deleteById(usuarioId);
     }
 }

@@ -17,7 +17,7 @@ import com.todo.infoedu.todolist.entity.Etiqueta;
 import com.todo.infoedu.todolist.servico.ServicoEtiqueta;
 
 @RestController
-@RequestMapping("/Etiquetas")
+@RequestMapping("/etiquetas")
 public class ControladorEtiqueta {
     
     @Autowired
@@ -28,19 +28,19 @@ public class ControladorEtiqueta {
         return etiquetaService.list();
     }
 
-    @GetMapping("{EtiquetaId}")
-    Optional<Etiqueta> getEtiqueta(@PathVariable("EtiquetaId") UUID EtiquetaId){
-        return etiquetaService.list(EtiquetaId);
+    @GetMapping("{etiquetaId}")
+    Optional<Etiqueta> getEtiqueta(@PathVariable("etiquetaId") UUID etiquetaId){
+        return etiquetaService.list(etiquetaId);
     }
 
     @PostMapping
-    List<Etiqueta> create(@RequestBody Etiqueta Etiqueta){
-        return etiquetaService.create(Etiqueta);
+    List<Etiqueta> create(@RequestBody Etiqueta etiqueta){
+        return etiquetaService.create(etiqueta);
     }
 
-    @PutMapping("{EtiquetaId}")
-    List<Etiqueta> update(@PathVariable("EtiquetaId") UUID EtiquetaId, @RequestBody Etiqueta Etiqueta){
-        return etiquetaService.update(Etiqueta);
+    @PutMapping("{etiquetaId}")
+    List<Etiqueta> update(@PathVariable("etiquetaId") UUID etiquetaId, @RequestBody Etiqueta etiqueta){
+        return etiquetaService.update(etiqueta);
     }
 
 

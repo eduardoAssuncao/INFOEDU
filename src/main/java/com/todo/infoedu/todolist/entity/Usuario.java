@@ -1,5 +1,6 @@
 package com.todo.infoedu.todolist.entity;
 
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -14,32 +15,40 @@ public class Usuario {
 
     @Id
 	@GeneratedValue(strategy = GenerationType.UUID)
-    private UUID UsuarioId;
-    private String UsuarioName;
-    @OneToMany(mappedBy = "Usuario")
-    private Set<Pendencia> Pendencias;
-    //DEPOIS CORRIGIR E TENTAR FAZER COM QUE UM USUARIO POSSA TER VARIAS PendenciaS.
+    private UUID usuarioId;
+    private String usuarioName;
+    @OneToMany(mappedBy = "usuario")
+    private List<Pendencia> pendencias;
 
     public Usuario(){}
 
-    public Usuario(String UsuarioName) {
-        this.UsuarioName = UsuarioName;
+    public Usuario(String usuarioName) {
+        this.usuarioName = usuarioName;
     }
 
     public UUID getUsuarioId() {
-        return UsuarioId;
+        return usuarioId;
+    }
+
+    public void setUsuarioId(UUID usuarioId) {
+        this.usuarioId = usuarioId;
     }
 
     public String getUsuarioName() {
-        return UsuarioName;
+        return usuarioName;
     }
 
-    public void setUsuarioName(String UsuarioName) {
-        this.UsuarioName = UsuarioName;
+    public void setUsuarioName(String usuarioName) {
+        this.usuarioName = usuarioName;
     }
 
-    public void setUsuarioId(UUID UsuarioId) {
-        this.UsuarioId = UsuarioId;
+    /*public List<Pendencia> getPendencias() {
+        return pendencias;
+    }*/
+
+    public void setPendencias(List<Pendencia> pendencias) {
+        this.pendencias = pendencias;
     }
 
+    
 }

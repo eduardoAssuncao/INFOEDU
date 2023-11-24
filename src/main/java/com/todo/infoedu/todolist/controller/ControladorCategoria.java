@@ -18,7 +18,7 @@ import com.todo.infoedu.todolist.entity.Categoria;
 import com.todo.infoedu.todolist.servico.ServicoCategoria;
 
 @RestController
-@RequestMapping("/Categorias")
+@RequestMapping("/categorias") //colocar em minusculo
 public class ControladorCategoria {
     
     @Autowired
@@ -29,24 +29,24 @@ public class ControladorCategoria {
         return categoriaService.list();
     }
 
-    @GetMapping("{CategoriaId}")
-    Optional<Categoria> getCategoria(@PathVariable("CategoriaId") UUID CategoriaId){
-        return categoriaService.list(CategoriaId);
+    @GetMapping("{categoriaId}")
+    Optional<Categoria> getCategoria(@PathVariable("categoriaId") UUID categoriaId){
+        return categoriaService.list(categoriaId);
     }
 
     @PostMapping
-    List<Categoria> create(@RequestBody Categoria Categoria){
-        return categoriaService.create(Categoria);
+    List<Categoria> create(@RequestBody Categoria categoria){
+        return categoriaService.create(categoria);
     }
 
-    @PutMapping("{CategoriaId}")
-    List<Categoria> update(@PathVariable("CategoriaId") UUID CategoriaId, @RequestBody Categoria Categoria){
-        return categoriaService.update(Categoria);
+    @PutMapping("{categoriaId}")
+    List<Categoria> update(@PathVariable("categoriaId") UUID categoriaId, @RequestBody Categoria categoria){
+        return categoriaService.update(categoria);
     }
 
-    @DeleteMapping("{CategoriaId}")
-    List<Categoria> delete(@PathVariable("CategoriaId") UUID CategoriaId){
-        return categoriaService.delete(CategoriaId);
+    @DeleteMapping("{categoriaId}")
+    List<Categoria> delete(@PathVariable("categoriaId") UUID categoriaId){
+        return categoriaService.delete(categoriaId);
     }
 
     //COLOAR UM DELETE ALL?

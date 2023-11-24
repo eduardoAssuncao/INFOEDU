@@ -21,8 +21,8 @@ public class ServicoPendencia {
         this.pendenciaRepository = pendenciaRepository;
     }
 
-    public List<Pendencia> create(Pendencia Pendencia){
-        pendenciaRepository.save(Pendencia);
+    public List<Pendencia> create(Pendencia pendencia){
+        pendenciaRepository.save(pendencia);
         return list();
     }
 
@@ -32,17 +32,17 @@ public class ServicoPendencia {
         return pendenciaRepository.findAll(sort);
     }
 
-    public Optional<Pendencia> list(UUID PendenciaId){
-        return pendenciaRepository.findById(PendenciaId);
+    public Optional<Pendencia> list(UUID pendenciaId){
+        return pendenciaRepository.findById(pendenciaId);
     }
 
-    public List<Pendencia> update(Pendencia Pendencia){
-        pendenciaRepository.save(Pendencia);
+    public List<Pendencia> update(Pendencia pendencia){
+        pendenciaRepository.save(pendencia);
         return list();
     }
 
-    public List<Pendencia> delete(UUID PendenciaId){
-        pendenciaRepository.deleteById(PendenciaId);;
+    public List<Pendencia> delete(UUID pendenciaId){
+        pendenciaRepository.deleteById(pendenciaId);;
         return list();
     }
 

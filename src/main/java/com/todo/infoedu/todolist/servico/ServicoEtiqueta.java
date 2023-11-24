@@ -16,8 +16,8 @@ public class ServicoEtiqueta {
     @Autowired
     RepositorioEtiqueta etiquetaRepository;
 
-    public List<Etiqueta> create(Etiqueta Etiqueta){
-        etiquetaRepository.save(Etiqueta);
+    public List<Etiqueta> create(Etiqueta etiqueta){
+        etiquetaRepository.save(etiqueta);
         return list();
     }
 
@@ -25,17 +25,17 @@ public class ServicoEtiqueta {
         return etiquetaRepository.findAll();
     }
 
-    public Optional<Etiqueta> list(UUID EtiquetaId){
-        return etiquetaRepository.findById(EtiquetaId);
+    public Optional<Etiqueta> list(UUID etiquetaId){
+        return etiquetaRepository.findById(etiquetaId);
     }
 
-    public List<Etiqueta> update(Etiqueta Etiqueta){
-        etiquetaRepository.save(Etiqueta);
+    public List<Etiqueta> update(Etiqueta etiqueta){
+        etiquetaRepository.save(etiqueta);
         return list();
     }
 
-    public List<Etiqueta> delete(UUID EtiquetaId){
-        etiquetaRepository.deleteById(EtiquetaId);
+    public List<Etiqueta> delete(UUID etiquetaId){
+        etiquetaRepository.deleteById(etiquetaId);
         return list();
     }
 }

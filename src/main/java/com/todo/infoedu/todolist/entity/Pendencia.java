@@ -16,18 +16,18 @@ public class Pendencia {
 
     @Id
 	@GeneratedValue(strategy = GenerationType.UUID)
-    private UUID PendenciaId;
+    private UUID pendenciaId;
     private String nome;
     private String descricao;
     private boolean realizado;
     private int prioridade;
     @ManyToOne
-    @JoinColumn(name="UsuarioId", nullable=false)
-    private Usuario Usuario;
+    @JoinColumn(name="usuarioId", nullable=false)
+    private Usuario usuario;
     @ManyToOne
-    private Categoria Categoria;
+    private Categoria categoria;
     @ManyToMany
-    private List<Etiqueta> Etiquetas;
+    private List<Etiqueta> etiquetas;
     
     public Pendencia(){}
 
@@ -38,8 +38,12 @@ public class Pendencia {
         this.prioridade = prioridade;
     }
 
-    public UUID getPendenciaId() {
-        return PendenciaId;
+    public UUID getpendenciaId() {
+        return pendenciaId;
+    }
+
+    public void setpendenciaId(UUID pendenciaId) {
+        this.pendenciaId = pendenciaId;
     }
 
     public String getNome() {
@@ -74,7 +78,31 @@ public class Pendencia {
         this.prioridade = prioridade;
     }
 
-    public void setPendenciaId(UUID PendenciaId) {
-        this.PendenciaId = PendenciaId;
+    /*public Usuario getUsuario() {
+        return usuario;
+    }*/
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
+
+    /*public Categoria getCategoria() {
+        return categoria;
+    }*/
+
+    /*public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }*/
+
+    /*public List<Etiqueta> getEtiquetas() {
+        return etiquetas;
+    }*/
+
+    /*public void setEtiquetas(List<Etiqueta> etiquetas) {
+        this.etiquetas = etiquetas;
+    }*/
+
+  
+
+    
 }

@@ -13,18 +13,18 @@ import jakarta.persistence.ManyToMany;
 public class Etiqueta {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID EtiquetaId;
+    private UUID etiquetaId;
     private String nome;
     private String cor;
-    @ManyToMany(mappedBy = "Etiquetas")
-    private List<Pendencia> Pendencias;
+    @ManyToMany(mappedBy = "etiquetas")
+    private List<Pendencia> pendencias;
 
 
     public UUID getEtiquetaId() {
-        return EtiquetaId;
+        return etiquetaId;
     }
-    public void setEtiquetaId(UUID EtiquetaId) {
-        this.EtiquetaId = EtiquetaId;
+    public void setEtiquetaId(UUID etiquetaId) {
+        this.etiquetaId = etiquetaId;
     }
     public String getNome() {
         return nome;
@@ -39,9 +39,9 @@ public class Etiqueta {
         this.cor = cor;
     }
     public List<Pendencia> getPendencias() {
-        return Pendencias;
+        return pendencias;
     }
-    public void setPendencias(List<Pendencia> Pendencias) {
-        this.Pendencias = Pendencias;
+    public void setPendencias(List<Pendencia> pendencias) {
+        this.pendencias = pendencias;
     } 
 }
