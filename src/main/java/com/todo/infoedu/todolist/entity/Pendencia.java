@@ -1,5 +1,7 @@
 package com.todo.infoedu.todolist.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,11 +17,12 @@ public class Pendencia {
     private Long pendenciaId;
     private String nome;
     private String descricao;
-    private boolean realizado;
+    private boolean realizado = false;
     private int prioridade;
 
     @ManyToOne
     @JoinColumn(name = "usuarioId")
+    @JsonIgnoreProperties("pendencias")
     private Usuario usuario;
     
     public Pendencia(){}

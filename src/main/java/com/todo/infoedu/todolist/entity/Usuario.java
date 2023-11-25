@@ -2,6 +2,8 @@ package com.todo.infoedu.todolist.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,7 +18,9 @@ public class Usuario {
     private Long usuarioId;
     
     private String usuarioName;
+
     @OneToMany(mappedBy = "usuario")
+    @JsonIgnore
     private List<Pendencia> pendencias;
 
     public Usuario(){}

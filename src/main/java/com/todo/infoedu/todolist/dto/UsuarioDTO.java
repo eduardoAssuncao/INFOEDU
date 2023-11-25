@@ -1,6 +1,7 @@
 package com.todo.infoedu.todolist.dto;
 
 public class UsuarioDTO {
+
     private String usuarioName;
 
     public UsuarioDTO(){}
