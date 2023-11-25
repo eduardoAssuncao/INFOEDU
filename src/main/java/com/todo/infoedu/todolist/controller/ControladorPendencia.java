@@ -56,11 +56,11 @@ public class ControladorPendencia {
 
     //path e requisições
     @PostMapping
-    public ResponseEntity<Pendencia> create(@RequestBody PendenciaDTO pendenciaDTO){
+    public ResponseEntity<PendenciaDTO> create(@RequestBody PendenciaDTO pendenciaDTO){
         Pendencia pendencia = mapper.toPendencia(pendenciaDTO);
-
-        Pendencia criarPendencia = pendenciaService.create(pendencia);
-        return new ResponseEntity<>(criarPendencia,HttpStatus.CREATED);
+        pendenciaService.create(pendencia);
+        
+        return new ResponseEntity<>(pendenciaDTO,HttpStatus.CREATED);
     }
 
     //path e requisições

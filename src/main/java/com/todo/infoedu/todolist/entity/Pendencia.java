@@ -23,8 +23,6 @@ public class Pendencia {
 
     @ManyToOne
     @JoinColumn(name = "usuarioId")
-    //@JsonIgnoreProperties("pendencias")
-    @JsonIgnore
     private Usuario usuario;
     
     public Pendencia(){}
