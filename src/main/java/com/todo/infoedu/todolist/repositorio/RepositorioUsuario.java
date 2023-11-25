@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.todo.infoedu.todolist.entity.Usuario;
 
 //Definir como interface
-public interface RepositorioUsuario extends JpaRepository<Usuario, UUID>{
+public interface RepositorioUsuario extends JpaRepository<Usuario, Long>{
 
 }

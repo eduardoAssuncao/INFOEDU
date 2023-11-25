@@ -31,11 +31,11 @@ public class ServicoPendencia {
         return pendenciaRepository.findAll(sort);
     }
 
-    public Optional<Pendencia> list(UUID pendenciaId){
+    public Optional<Pendencia> list(Long pendenciaId){
         return pendenciaRepository.findById(pendenciaId);
     }
 
-    public Pendencia update(UUID pendenciaId, Pendencia pendenciaAtualizada){
+    public Pendencia update(Long pendenciaId, Pendencia pendenciaAtualizada){
         return pendenciaRepository.findById(pendenciaId)
                 .map(pendencia -> {
                     pendencia.setNome(pendenciaAtualizada.getNome());
@@ -48,7 +48,7 @@ public class ServicoPendencia {
                 .orElse(null);
     }
 
-    public void delete(UUID pendenciaId){
+    public void delete(Long pendenciaId){
         pendenciaRepository.deleteById(pendenciaId);
     }
 

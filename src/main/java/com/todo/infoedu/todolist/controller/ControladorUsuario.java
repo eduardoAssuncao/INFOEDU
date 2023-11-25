@@ -38,7 +38,7 @@ public class ControladorUsuario {
     }
 
     @GetMapping("/{usuarioId}")
-     public ResponseEntity<Usuario> getUsuarioById(@PathVariable UUID usuarioId){
+     public ResponseEntity<Usuario> getUsuarioById(@PathVariable Long usuarioId){
         Optional<Usuario> usuario = usuarioService.list(usuarioId);
         return usuario.map(valor -> new ResponseEntity<>(valor, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -51,7 +51,7 @@ public class ControladorUsuario {
     }
 
     @PutMapping("/{usuarioId}")
-    public ResponseEntity<Usuario> update(@PathVariable UUID usuarioId, @RequestBody Usuario usuarioAtualizado){
+    public ResponseEntity<Usuario> update(@PathVariable Long usuarioId, @RequestBody Usuario usuarioAtualizado){
         Usuario usuario = usuarioService.update(usuarioId, usuarioAtualizado);
         return (usuario != null)
                 ? new ResponseEntity<>(usuario, HttpStatus.OK)
@@ -59,7 +59,7 @@ public class ControladorUsuario {
     }
 
     @DeleteMapping("/{usuarioId}")
-    public ResponseEntity<Void> delete(@PathVariable UUID usuarioId){
+    public ResponseEntity<Void> delete(@PathVariable Long usuarioId){
         usuarioService.delete(usuarioId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

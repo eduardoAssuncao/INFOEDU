@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -16,40 +17,35 @@ import jakarta.persistence.ManyToOne;
 public class Pendencia {
 
     @Id
-	@GeneratedValue(strategy = GenerationType.UUID)
-    private UUID pendenciaId;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+    private Long pendenciaId;
     private String nome;
     private String descricao;
     private boolean realizado;
     private int prioridade;
     @ManyToOne
-    @JoinColumn(name="usuario_id")
     private Usuario usuario;
     @ManyToOne
-    @JoinColumn(name = "categoria_id")
     private Categoria categoria;
     @ManyToMany
-    @JoinTable(
-        name = "pendencia_etiqueta",
-        joinColumns = @JoinColumn(name = "pendencia_id"),
-        inverseJoinColumns = @JoinColumn(name = "etiqueta_id")
-    )
     private List<Etiqueta> etiquetas;
     
     public Pendencia(){}
 
-    public Pendencia(String nome, String descricao, boolean realizado, int prioridade) {
+    
+    public Pendencia(Long pendenciaId, String nome, String descricao, boolean realizado, int prioridade) {
+        this.pendenciaId = pendenciaId;
         this.nome = nome;
         this.descricao = descricao;
         this.realizado = realizado;
         this.prioridade = prioridade;
     }
 
-    public UUID getpendenciaId() {
+    public Long getpendenciaId() {
         return pendenciaId;
     }
 
-    public void setpendenciaId(UUID pendenciaId) {
+    public void setpendenciaId(Long pendenciaId) {
         this.pendenciaId = pendenciaId;
     }
 
@@ -108,8 +104,4 @@ public class Pendencia {
     public void setEtiquetas(List<Etiqueta> etiquetas) {
         this.etiquetas = etiquetas;
     }
-
-  
-
-    
 }

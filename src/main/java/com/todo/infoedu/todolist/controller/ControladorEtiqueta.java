@@ -33,7 +33,7 @@ public class ControladorEtiqueta {
     }
 
     @GetMapping("/{etiquetaId}")
-    public ResponseEntity<Etiqueta> getEtiquetaById(@PathVariable UUID etiquetaId){
+    public ResponseEntity<Etiqueta> getEtiquetaById(@PathVariable Long etiquetaId){
         Optional<Etiqueta> etiqueta = etiquetaService.list(etiquetaId);
         return etiqueta.map(valor -> new ResponseEntity<>(valor, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -46,7 +46,7 @@ public class ControladorEtiqueta {
     }
 
     @PutMapping("/{etiquetaId}")
-    public ResponseEntity<Etiqueta> update(@PathVariable UUID etiquetaId, @RequestBody Etiqueta etiquetaAtualizada){
+    public ResponseEntity<Etiqueta> update(@PathVariable Long etiquetaId, @RequestBody Etiqueta etiquetaAtualizada){
         Etiqueta etiqueta = etiquetaService.update(etiquetaId, etiquetaAtualizada);
         return (etiqueta != null)
                 ? new ResponseEntity<>(etiqueta, HttpStatus.OK)
@@ -54,7 +54,7 @@ public class ControladorEtiqueta {
     }
 
     @DeleteMapping("/{etiquetaId}")
-    public ResponseEntity<Void> delete(@PathVariable UUID etiquetaId){
+    public ResponseEntity<Void> delete(@PathVariable Long etiquetaId){
         etiquetaService.delete(etiquetaId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

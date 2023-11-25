@@ -24,11 +24,11 @@ public class ServicoEtiqueta {
         return etiquetaRepository.findAll();
     }
 
-    public Optional<Etiqueta> list(UUID etiquetaId){
+    public Optional<Etiqueta> list(Long etiquetaId){
         return etiquetaRepository.findById(etiquetaId);
     }
 
-    public Etiqueta update(UUID etiquetaId, Etiqueta etiquetaAtualizada){
+    public Etiqueta update(Long etiquetaId, Etiqueta etiquetaAtualizada){
         return etiquetaRepository.findById(etiquetaId)
                 .map(etiqueta -> {
                     etiqueta.setNome(etiquetaAtualizada.getNome());
@@ -38,7 +38,7 @@ public class ServicoEtiqueta {
                 .orElse(null);
     }
 
-    public void delete(UUID etiquetaId){
+    public void delete(Long etiquetaId){
         etiquetaRepository.deleteById(etiquetaId);
     }
 }

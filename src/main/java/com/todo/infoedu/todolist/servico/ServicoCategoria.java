@@ -24,11 +24,11 @@ public class ServicoCategoria {
         return categoriaRepository.findAll();
     }
 
-    public Optional<Categoria> list(UUID categoriaId){
+    public Optional<Categoria> list(Long categoriaId){
         return categoriaRepository.findById(categoriaId);
     }
 
-    public Categoria update(UUID categoriaId, Categoria categoriaAtualizada){
+    public Categoria update(Long categoriaId, Categoria categoriaAtualizada){
         return categoriaRepository.findById(categoriaId)
                 .map(categoria -> {
                     categoria.setNome(categoriaAtualizada.getNome());
@@ -38,7 +38,7 @@ public class ServicoCategoria {
                 .orElse(null);
     }
 
-    public void delete(UUID categoriaId){
+    public void delete(Long categoriaId){
         categoriaRepository.deleteById(categoriaId);
     }
 }

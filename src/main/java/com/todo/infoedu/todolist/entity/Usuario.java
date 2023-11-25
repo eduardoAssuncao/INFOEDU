@@ -15,22 +15,23 @@ public class Usuario {
 
     @Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID usuarioId;
+    private Long usuarioId;
     private String usuarioName;
     @OneToMany(mappedBy = "usuario")
     private List<Pendencia> pendencias;
 
     public Usuario(){}
 
-    public Usuario(String usuarioName) {
+    public Usuario(Long usuarioId, String usuarioName) {
+        this.usuarioId = usuarioId;
         this.usuarioName = usuarioName;
     }
 
-    public UUID getUsuarioId() {
+    public Long getUsuarioId() {
         return usuarioId;
     }
 
-    public void setUsuarioId(UUID usuarioId) {
+    public void setUsuarioId(Long usuarioId) {
         this.usuarioId = usuarioId;
     }
 

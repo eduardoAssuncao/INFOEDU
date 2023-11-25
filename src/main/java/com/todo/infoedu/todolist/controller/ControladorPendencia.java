@@ -40,7 +40,7 @@ public class ControladorPendencia {
     }
 
     @GetMapping("/{pendenciaId}")
-    public ResponseEntity<Pendencia> getPendenciaById(@PathVariable UUID pendenciaId){
+    public ResponseEntity<Pendencia> getPendenciaById(@PathVariable Long pendenciaId){
         Optional<Pendencia> pendencia = pendenciaService.list(pendenciaId);
         return pendencia.map(valor -> new ResponseEntity<>(valor, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -56,7 +56,7 @@ public class ControladorPendencia {
 
     //path e requisições
     @PutMapping("/{pendenciaId}")
-    public ResponseEntity<Pendencia> update(@PathVariable UUID pendenciaId, @RequestBody Pendencia pendenciaAtualizada){
+    public ResponseEntity<Pendencia> update(@PathVariable Long pendenciaId, @RequestBody Pendencia pendenciaAtualizada){
         Pendencia pendencia = pendenciaService.update(pendenciaId, pendenciaAtualizada);
         return (pendencia != null)
                 ? new ResponseEntity<>(pendencia, HttpStatus.OK)
@@ -65,7 +65,7 @@ public class ControladorPendencia {
 
     //path e requisições
     @DeleteMapping("/{pendenciaId}")
-    public ResponseEntity<Void> delete(@PathVariable UUID pendenciaId){
+    public ResponseEntity<Void> delete(@PathVariable Long pendenciaId){
         pendenciaService.delete(pendenciaId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

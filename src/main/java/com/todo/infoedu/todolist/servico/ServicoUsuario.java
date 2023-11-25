@@ -28,11 +28,11 @@ public class ServicoUsuario {
         return usuarioRepository.findAll();
     }
 
-    public Optional<Usuario> list(UUID usuarioId){
+    public Optional<Usuario> list(Long usuarioId){
         return usuarioRepository.findById(usuarioId);
     }
 
-    public Usuario update(UUID usuarioId, Usuario usuarioAtualizado){
+    public Usuario update(Long usuarioId, Usuario usuarioAtualizado){
         return usuarioRepository.findById(usuarioId)
                 .map(usuario -> {
                     usuario.setUsuarioName(usuarioAtualizado.getUsuarioName());
@@ -41,7 +41,7 @@ public class ServicoUsuario {
                 .orElse(null);
     }
 
-    public void delete(UUID usuarioId){
+    public void delete(Long usuarioId){
         usuarioRepository.deleteById(usuarioId);
     }
 }

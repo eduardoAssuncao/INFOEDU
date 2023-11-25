@@ -33,7 +33,7 @@ public class ControladorCategoria {
     }
 
     @GetMapping("/{categoriaId}")
-    public ResponseEntity<Categoria> getCategoriaById(@PathVariable UUID categoriaId){
+    public ResponseEntity<Categoria> getCategoriaById(@PathVariable Long categoriaId){
         Optional<Categoria> categoria = categoriaService.list(categoriaId);
         return categoria.map(valor -> new ResponseEntity<>(valor, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -46,7 +46,7 @@ public class ControladorCategoria {
     }
 
     @PutMapping("/{categoriaId}")
-    public ResponseEntity<Categoria> update(@PathVariable UUID categoriaId, @RequestBody Categoria categoriaAtualizada){
+    public ResponseEntity<Categoria> update(@PathVariable Long categoriaId, @RequestBody Categoria categoriaAtualizada){
         Categoria categoria = categoriaService.update(categoriaId, categoriaAtualizada);
         return (categoria != null)
                 ? new ResponseEntity<>(categoria, HttpStatus.OK)
@@ -54,7 +54,7 @@ public class ControladorCategoria {
     }
 
     @DeleteMapping("/{categoriaId}")
-    public ResponseEntity<Categoria> delete(@PathVariable UUID categoriaId){
+    public ResponseEntity<Categoria> delete(@PathVariable Long categoriaId){
         categoriaService.delete(categoriaId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

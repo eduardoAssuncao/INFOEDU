@@ -13,17 +13,24 @@ import jakarta.persistence.OneToMany;
 public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID categoriaId;
+    private Long categoriaId;
     private String nome;
     private String descricao;
     @OneToMany(mappedBy = "categoria")
     private List<Pendencia> pendencias;
 
+    public Categoria() {}
 
-    public UUID getCategoriaId() {
+    public Categoria(Long categoriaId, String nome, String descricao) {
+        this.categoriaId = categoriaId;
+        this.nome = nome;
+        this.descricao = descricao;
+    }
+
+    public Long getCategoriaId() {
         return categoriaId;
     }
-    public void setCategoriaId(UUID categoriaId) {
+    public void setCategoriaId(Long categoriaId) {
         this.categoriaId = categoriaId;
     }
     public String getNome() {
@@ -38,10 +45,10 @@ public class Categoria {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    public List<Pendencia> getPendencias() {
+    /*public List<Pendencia> getPendencias() {
         return pendencias;
     }
     public void setPendencias(List<Pendencia> pendencias) {
         this.pendencias = pendencias;
-    }
+    }*/
 }
