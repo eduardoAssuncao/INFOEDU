@@ -12,7 +12,7 @@ import jakarta.persistence.OneToMany;
 @Entity
 public class Categoria {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID categoriaId;
     private String nome;
     private String descricao;

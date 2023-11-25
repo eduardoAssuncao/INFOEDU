@@ -14,7 +14,7 @@ import jakarta.persistence.OneToMany;
 public class Usuario {
 
     @Id
-	@GeneratedValue(strategy = GenerationType.UUID)
+	@GeneratedValue(strategy = GenerationType.AUTO)
     private UUID usuarioId;
     private String usuarioName;
     @OneToMany(mappedBy = "usuario")
@@ -42,13 +42,11 @@ public class Usuario {
         this.usuarioName = usuarioName;
     }
 
-    /*public List<Pendencia> getPendencias() {
+    public List<Pendencia> getPendencias() {
         return pendencias;
-    }*/
+    }
 
     public void setPendencias(List<Pendencia> pendencias) {
         this.pendencias = pendencias;
     }
-
-    
 }

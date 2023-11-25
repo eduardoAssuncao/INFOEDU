@@ -5,6 +5,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,23 +27,36 @@ public class ControladorEtiqueta {
     ServicoEtiqueta etiquetaService;
 
     @GetMapping
-    List<Etiqueta> getAllEtiquetas(){
-        return etiquetaService.list();
+    public ResponseEntity<List<Etiqueta>> getAllEtiquetas(){
+        List<Etiqueta> etiquetas = etiquetaService.list();
+        return new ResponseEntity<>(etiquetas, HttpStatus.OK);
     }
 
-    @GetMapping("{etiquetaId}")
-    Optional<Etiqueta> getEtiqueta(@PathVariable("etiquetaId") UUID etiquetaId){
-        return etiquetaService.list(etiquetaId);
+    @GetMapping("/{etiquetaId}")
+    public ResponseEntity<Etiqueta> getEtiquetaById(@PathVariable UUID etiquetaId){
+        Optional<Etiqueta> etiqueta = etiquetaService.list(etiquetaId);
+        return etiqueta.map(valor -> new ResponseEntity<>(valor, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping
-    List<Etiqueta> create(@RequestBody Etiqueta etiqueta){
-        return etiquetaService.create(etiqueta);
+    public ResponseEntity<Etiqueta> create(@RequestBody Etiqueta etiqueta){
+        Etiqueta criarEtiqueta = etiquetaService.create(etiqueta);
+        return new ResponseEntity<>(criarEtiqueta, HttpStatus.CREATED);
     }
 
-    @PutMapping("{etiquetaId}")
-    List<Etiqueta> update(@PathVariable("etiquetaId") UUID etiquetaId, @RequestBody Etiqueta etiqueta){
-        return etiquetaService.update(etiqueta);
+    @PutMapping("/{etiquetaId}")
+    public ResponseEntity<Etiqueta> update(@PathVariable UUID etiquetaId, @RequestBody Etiqueta etiquetaAtualizada){
+        Etiqueta etiqueta = etiquetaService.update(etiquetaId, etiquetaAtualizada);
+        return (etiqueta != null)
+                ? new ResponseEntity<>(etiqueta, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @DeleteMapping("/{etiquetaId}")
+    public ResponseEntity<Void> delete(@PathVariable UUID etiquetaId){
+        etiquetaService.delete(etiquetaId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 

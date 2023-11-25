@@ -12,7 +12,7 @@ import jakarta.persistence.ManyToMany;
 @Entity
 public class Etiqueta {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID etiquetaId;
     private String nome;
     private String cor;

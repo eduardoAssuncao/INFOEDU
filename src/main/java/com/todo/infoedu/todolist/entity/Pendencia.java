@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
@@ -22,11 +23,17 @@ public class Pendencia {
     private boolean realizado;
     private int prioridade;
     @ManyToOne
-    @JoinColumn(name="usuarioId", nullable=false)
+    @JoinColumn(name="usuario_id")
     private Usuario usuario;
     @ManyToOne
+    @JoinColumn(name = "categoria_id")
     private Categoria categoria;
     @ManyToMany
+    @JoinTable(
+        name = "pendencia_etiqueta",
+        joinColumns = @JoinColumn(name = "pendencia_id"),
+        inverseJoinColumns = @JoinColumn(name = "etiqueta_id")
+    )
     private List<Etiqueta> etiquetas;
     
     public Pendencia(){}
@@ -78,29 +85,29 @@ public class Pendencia {
         this.prioridade = prioridade;
     }
 
-    /*public Usuario getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
-    }*/
+    }
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 
-    /*public Categoria getCategoria() {
+    public Categoria getCategoria() {
         return categoria;
-    }*/
+    }
 
-    /*public void setCategoria(Categoria categoria) {
+    public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
-    }*/
+    }
 
-    /*public List<Etiqueta> getEtiquetas() {
+    public List<Etiqueta> getEtiquetas() {
         return etiquetas;
-    }*/
+    }
 
-    /*public void setEtiquetas(List<Etiqueta> etiquetas) {
+    public void setEtiquetas(List<Etiqueta> etiquetas) {
         this.etiquetas = etiquetas;
-    }*/
+    }
 
   
 

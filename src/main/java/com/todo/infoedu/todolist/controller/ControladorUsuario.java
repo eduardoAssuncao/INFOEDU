@@ -58,7 +58,7 @@ public class ControladorUsuario {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @DeleteMapping("{usuarioId}")
+    @DeleteMapping("/{usuarioId}")
     public ResponseEntity<Void> delete(@PathVariable UUID usuarioId){
         usuarioService.delete(usuarioId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

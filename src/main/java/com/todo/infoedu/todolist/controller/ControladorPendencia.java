@@ -5,6 +5,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,30 +34,39 @@ public class ControladorPendencia {
 
     //path e requisições
     @GetMapping()
-    List<Pendencia> getAllPendencias(){
-        return pendenciaService.list();
+    public ResponseEntity<List<Pendencia>> getAllPendencias(){
+        List<Pendencia> pendencias = pendenciaService.list();
+        return new ResponseEntity<>(pendencias, HttpStatus.OK);
     }
 
-    @GetMapping("{pendenciaId}")
-    Optional<Pendencia> getPendencia(@PathVariable("pendenciaId") UUID pendenciaId){
-        return pendenciaService.list(pendenciaId);
+    @GetMapping("/{pendenciaId}")
+    public ResponseEntity<Pendencia> getPendenciaById(@PathVariable UUID pendenciaId){
+        Optional<Pendencia> pendencia = pendenciaService.list(pendenciaId);
+        return pendencia.map(valor -> new ResponseEntity<>(valor, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+                
     }
 
     //path e requisições
     @PostMapping
-    List<Pendencia> create(@RequestBody Pendencia pendencia){
-        return pendenciaService.create(pendencia);
+    public ResponseEntity<Pendencia> create(@RequestBody Pendencia pendencia){
+        Pendencia criarPendencia = pendenciaService.create(pendencia);
+        return new ResponseEntity<>(criarPendencia,HttpStatus.CREATED);
     } 
 
     //path e requisições
-    @PutMapping("{pendenciaId}")
-    List<Pendencia> update(@PathVariable("pendenciaId") UUID pendenciaId, @RequestBody Pendencia pendencia){
-        return pendenciaService.update(pendencia);
+    @PutMapping("/{pendenciaId}")
+    public ResponseEntity<Pendencia> update(@PathVariable UUID pendenciaId, @RequestBody Pendencia pendenciaAtualizada){
+        Pendencia pendencia = pendenciaService.update(pendenciaId, pendenciaAtualizada);
+        return (pendencia != null)
+                ? new ResponseEntity<>(pendencia, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     //path e requisições
-    @DeleteMapping("{pendenciaId}")
-    List<Pendencia> delete(@PathVariable("id") UUID pendenciaId){
-        return pendenciaService.delete(pendenciaId);
+    @DeleteMapping("/{pendenciaId}")
+    public ResponseEntity<Void> delete(@PathVariable UUID pendenciaId){
+        pendenciaService.delete(pendenciaId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

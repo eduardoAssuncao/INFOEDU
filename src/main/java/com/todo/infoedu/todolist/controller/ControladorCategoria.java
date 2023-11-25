@@ -5,6 +5,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,28 +27,36 @@ public class ControladorCategoria {
     ServicoCategoria categoriaService;
 
     @GetMapping
-    List<Categoria> getAllCategorias(){
-        return categoriaService.list();
+    public ResponseEntity<List<Categoria>> getAllCategorias(){
+        List<Categoria> categorias = categoriaService.list();
+        return new ResponseEntity<>(categorias, HttpStatus.OK);
     }
 
-    @GetMapping("{categoriaId}")
-    Optional<Categoria> getCategoria(@PathVariable("categoriaId") UUID categoriaId){
-        return categoriaService.list(categoriaId);
+    @GetMapping("/{categoriaId}")
+    public ResponseEntity<Categoria> getCategoriaById(@PathVariable UUID categoriaId){
+        Optional<Categoria> categoria = categoriaService.list(categoriaId);
+        return categoria.map(valor -> new ResponseEntity<>(valor, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping
-    List<Categoria> create(@RequestBody Categoria categoria){
-        return categoriaService.create(categoria);
+    public ResponseEntity<Categoria> create(@RequestBody Categoria categoria){
+        Categoria criarCategoria = categoriaService.create(categoria);
+        return new ResponseEntity<>(criarCategoria, HttpStatus.CREATED);
     }
 
-    @PutMapping("{categoriaId}")
-    List<Categoria> update(@PathVariable("categoriaId") UUID categoriaId, @RequestBody Categoria categoria){
-        return categoriaService.update(categoria);
+    @PutMapping("/{categoriaId}")
+    public ResponseEntity<Categoria> update(@PathVariable UUID categoriaId, @RequestBody Categoria categoriaAtualizada){
+        Categoria categoria = categoriaService.update(categoriaId, categoriaAtualizada);
+        return (categoria != null)
+                ? new ResponseEntity<>(categoria, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @DeleteMapping("{categoriaId}")
-    List<Categoria> delete(@PathVariable("categoriaId") UUID categoriaId){
-        return categoriaService.delete(categoriaId);
+    @DeleteMapping("/{categoriaId}")
+    public ResponseEntity<Categoria> delete(@PathVariable UUID categoriaId){
+        categoriaService.delete(categoriaId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     //COLOAR UM DELETE ALL?
