@@ -1,4 +1,4 @@
-package com.todo.infoedu.todolist.entity;
+package com.todo.infoedu.todolist.dto;
 
 public class UsuarioDTO {
     private String usuarioName;

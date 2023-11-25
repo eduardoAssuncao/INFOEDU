@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.todo.infoedu.todolist.dto.PendenciaDTO;
 import com.todo.infoedu.todolist.entity.Mapper;
 import com.todo.infoedu.todolist.entity.Pendencia;
-import com.todo.infoedu.todolist.entity.PendenciaDTO;
 import com.todo.infoedu.todolist.servico.ServicoPendencia;
 
 @RestController

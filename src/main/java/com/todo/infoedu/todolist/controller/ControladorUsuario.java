@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.todo.infoedu.todolist.dto.UsuarioDTO;
 import com.todo.infoedu.todolist.entity.Mapper;
 import com.todo.infoedu.todolist.entity.Usuario;
-import com.todo.infoedu.todolist.entity.UsuarioDTO;
 import com.todo.infoedu.todolist.servico.ServicoUsuario;
 
 @RestController

@@ -1,10 +1,9 @@
 package com.todo.infoedu.todolist.entity;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.stereotype.Component;
 
+import com.todo.infoedu.todolist.dto.PendenciaDTO;
+import com.todo.infoedu.todolist.dto.UsuarioDTO;
 import com.todo.infoedu.todolist.servico.ServicoUsuario;
 
 @Component
@@ -22,13 +21,8 @@ public class Mapper {
         String descricao = pendencia.getDescricao();
         int prioridade = pendencia.getPrioridade();
         Long usuarioId = pendencia.getUsuario().getUsuarioId();
-        String categoria = pendencia.getCategoria().getNome();
-        List<Etiqueta> etiquetasEntidades = pendencia.getEtiquetas();
-        List<String> etiquetas = etiquetasEntidades.stream()
-                                            .map(Etiqueta::getNome)
-                                            .collect(Collectors.toList());
 
-        return new PendenciaDTO(nome, descricao, prioridade, usuarioId, categoria, etiquetas);
+        return new PendenciaDTO(nome, descricao, prioridade, usuarioId);
     }
 
     public Pendencia toPendencia(PendenciaDTO pendenciaDTO){
@@ -41,16 +35,7 @@ public class Mapper {
         Usuario usuario = servicoUsuario.list(usuarioId)
                                         .orElseThrow(() -> new RuntimeException("Usuário não encontrado para o ID: " + usuarioId));
 
-        String categoriaNome = pendenciaDTO.getCategoria();
-        Categoria categoria = new Categoria(categoriaNome);
-
-
-        List<String> etiquetasNome = pendenciaDTO.getEtiquetas();
-        List<Etiqueta> etiquetas = etiquetasNome.stream()
-                                            .map(etiqueta -> new Etiqueta(etiqueta))
-                                            .collect(Collectors.toList());
-
-        return new Pendencia(nome, usuario, descricao, prioridade, categoria, etiquetas);
+        return new Pendencia(nome, usuario, descricao, prioridade);
     }
 
     public Usuario toUser(UsuarioDTO usuarioDTO) {

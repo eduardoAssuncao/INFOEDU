@@ -1,6 +1,4 @@
-package com.todo.infoedu.todolist.entity;
-
-import java.util.List;
+package com.todo.infoedu.todolist.dto;
 
 public class PendenciaDTO {
 
@@ -8,18 +6,14 @@ public class PendenciaDTO {
     private String descricao;
     private int prioridade;
     private Long usuarioId;
-    private String categoria;
-    private List<String> etiquetas;
 
     public PendenciaDTO(){}
 
-    public PendenciaDTO(String nome, String descricao, int prioridade, Long usuarioId, String categoria, List<String> etiquetas) {
+    public PendenciaDTO(String nome, String descricao, int prioridade, Long usuarioId) {
         this.nome = nome;
         this.descricao = descricao;
         this.prioridade = prioridade;
         this.usuarioId = usuarioId;
-        this.categoria = categoria;
-        this.etiquetas = etiquetas;
     }  
 
     public String getNome() {
@@ -51,22 +45,5 @@ public class PendenciaDTO {
 
     public void setUsuarioId(Long usuarioId) {
         this.usuarioId = usuarioId;
-    }
-
-    public String getCategoria() {
-        return this.categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
-
-    public List<String> getEtiquetas() {
-        return this.etiquetas;
-    }
-
-    public void setEtiquetas(List<String> etiquetas) {
-        this.etiquetas = etiquetas;
-    }
-    
+    }    
 }
