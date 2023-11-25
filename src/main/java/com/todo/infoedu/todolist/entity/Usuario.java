@@ -20,7 +20,6 @@ public class Usuario {
     private String usuarioName;
 
     @OneToMany(mappedBy = "usuario")
-    @JsonIgnore
     private List<Pendencia> pendencias;
 
     public Usuario(){}

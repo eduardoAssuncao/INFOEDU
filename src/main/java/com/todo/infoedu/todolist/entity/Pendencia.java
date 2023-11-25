@@ -1,5 +1,6 @@
 package com.todo.infoedu.todolist.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
@@ -22,7 +23,8 @@ public class Pendencia {
 
     @ManyToOne
     @JoinColumn(name = "usuarioId")
-    @JsonIgnoreProperties("pendencias")
+    //@JsonIgnoreProperties("pendencias")
+    @JsonIgnore
     private Usuario usuario;
     
     public Pendencia(){}

@@ -44,10 +44,11 @@ public class ControladorUsuario {
     }
 
     @GetMapping("/{usuarioId}")
-     public ResponseEntity<Usuario> getUsuarioById(@PathVariable Long usuarioId){
+     public ResponseEntity<UsuarioDTO> getUsuarioById(@PathVariable Long usuarioId){
         Optional<Usuario> usuario = usuarioService.list(usuarioId);
-        return usuario.map(valor -> new ResponseEntity<>(valor, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        UsuarioDTO usuarioDTO = mapper.toUserDto(usuario.get());
+        
+        return new ResponseEntity<>(usuarioDTO, HttpStatus.OK);
     }
 
     @PostMapping

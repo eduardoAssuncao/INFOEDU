@@ -46,10 +46,11 @@ public class ControladorPendencia {
     }
 
     @GetMapping("/{pendenciaId}")
-    public ResponseEntity<Pendencia> getPendenciaById(@PathVariable Long pendenciaId){
+    public ResponseEntity<PendenciaDTO> getPendenciaById(@PathVariable Long pendenciaId){
         Optional<Pendencia> pendencia = pendenciaService.list(pendenciaId);
-        return pendencia.map(valor -> new ResponseEntity<>(valor, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        PendenciaDTO pendenciaDTO = mapper.toDTO(pendencia.get());
+
+        return new ResponseEntity<>(pendenciaDTO, HttpStatus.OK);
                 
     }
 
@@ -60,7 +61,7 @@ public class ControladorPendencia {
 
         Pendencia criarPendencia = pendenciaService.create(pendencia);
         return new ResponseEntity<>(criarPendencia,HttpStatus.CREATED);
-    } 
+    }
 
     //path e requisições
     @PutMapping("/{pendenciaId}")
