@@ -1,8 +1,6 @@
 package com.todo.infoedu.todolist.entity;
 
 import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,14 +14,14 @@ public class Usuario {
     @Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
     private Long usuarioId;
+    
     private String usuarioName;
     @OneToMany(mappedBy = "usuario")
     private List<Pendencia> pendencias;
 
     public Usuario(){}
 
-    public Usuario(Long usuarioId, String usuarioName) {
-        this.usuarioId = usuarioId;
+    public Usuario(String usuarioName) {
         this.usuarioName = usuarioName;
     }
 

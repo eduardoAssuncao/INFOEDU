@@ -2,9 +2,8 @@ package com.todo.infoedu.todolist.controller;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
+import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.todo.infoedu.todolist.entity.Mapper;
 import com.todo.infoedu.todolist.entity.Pendencia;
+import com.todo.infoedu.todolist.entity.PendenciaDTO;
 import com.todo.infoedu.todolist.servico.ServicoPendencia;
 
 @RestController
@@ -27,15 +28,20 @@ public class ControladorPendencia {
     //injeção por meio do Autowired
     //@Autowired
     private ServicoPendencia pendenciaService;
+    private final Mapper mapper;
 
-    public ControladorPendencia(ServicoPendencia pendenciaService){
+    public ControladorPendencia(ServicoPendencia pendenciaService, Mapper mapper){
         this.pendenciaService = pendenciaService;
+        this.mapper = mapper;
     }
 
     //path e requisições
     @GetMapping()
-    public ResponseEntity<List<Pendencia>> getAllPendencias(){
-        List<Pendencia> pendencias = pendenciaService.list();
+    public ResponseEntity<List<PendenciaDTO>> getAllPendencias(){
+        List<PendenciaDTO> pendencias = pendenciaService.list().stream()
+                                        .map(mapper::toDTO)
+                                        .collect(Collectors.toList());
+
         return new ResponseEntity<>(pendencias, HttpStatus.OK);
     }
 
@@ -49,7 +55,9 @@ public class ControladorPendencia {
 
     //path e requisições
     @PostMapping
-    public ResponseEntity<Pendencia> create(@RequestBody Pendencia pendencia){
+    public ResponseEntity<Pendencia> create(@RequestBody PendenciaDTO pendenciaDTO){
+        Pendencia pendencia = mapper.toPendencia(pendenciaDTO);
+
         Pendencia criarPendencia = pendenciaService.create(pendencia);
         return new ResponseEntity<>(criarPendencia,HttpStatus.CREATED);
     } 

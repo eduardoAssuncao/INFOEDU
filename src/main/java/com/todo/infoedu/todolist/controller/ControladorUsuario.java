@@ -2,9 +2,8 @@ package com.todo.infoedu.todolist.controller;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
+import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.todo.infoedu.todolist.entity.Mapper;
 import com.todo.infoedu.todolist.entity.Usuario;
+import com.todo.infoedu.todolist.entity.UsuarioDTO;
 import com.todo.infoedu.todolist.servico.ServicoUsuario;
 
 @RestController
@@ -25,15 +26,20 @@ public class ControladorUsuario {
 
     //Injeção de dependência
     //@Autowired
-    ServicoUsuario usuarioService;
+    private ServicoUsuario usuarioService;
+    private final Mapper mapper;
 
-    public ControladorUsuario (ServicoUsuario usuarioService){
+    public ControladorUsuario (ServicoUsuario usuarioService, Mapper mapper){
         this.usuarioService = usuarioService;
+        this.mapper = mapper;
     }
 
     @GetMapping
-    public ResponseEntity<List<Usuario>> getAllUsuarios(){
-        List<Usuario> usuarios = usuarioService.list();
+    public ResponseEntity<List<UsuarioDTO>> getAllUsuarios(){
+        List<UsuarioDTO> usuarios = usuarioService.list()
+                                    .stream()
+                                    .map(mapper::toUserDto)
+                                    .collect(Collectors.toList());
         return new ResponseEntity<>(usuarios, HttpStatus.OK); 
     }
 
@@ -45,7 +51,9 @@ public class ControladorUsuario {
     }
 
     @PostMapping
-    public ResponseEntity<Usuario> create(@RequestBody Usuario usuario){
+    public ResponseEntity<Usuario> create(@RequestBody UsuarioDTO usuarioDTO){
+        Usuario usuario = mapper.toUser(usuarioDTO);
+        
         Usuario criarUsuario = usuarioService.create(usuario);
         return new ResponseEntity<>(criarUsuario, HttpStatus.CREATED);
     }

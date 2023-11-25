@@ -1,7 +1,6 @@
 package com.todo.infoedu.todolist.entity;
 
 import java.util.List;
-import java.util.UUID;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,17 +10,21 @@ import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Etiqueta {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long etiquetaId;
     private String nome;
     private String cor;
+
     @ManyToMany(mappedBy = "etiquetas")
     private List<Pendencia> pendencias;
 
     public Etiqueta() {}
 
-
+    public Etiqueta(String nome) {
+        this.nome = nome;
+    }
 
     public Long getEtiquetaId() {
         return etiquetaId;

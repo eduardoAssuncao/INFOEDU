@@ -1,15 +1,13 @@
 package com.todo.infoedu.todolist.entity;
 
 import java.util.List;
-import java.util.UUID;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
@@ -23,22 +21,29 @@ public class Pendencia {
     private String descricao;
     private boolean realizado;
     private int prioridade;
+
     @ManyToOne
+    @JoinColumn(name = "usuarioId")
     private Usuario usuario;
-    @ManyToOne
+    
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "categoriaId")
     private Categoria categoria;
-    @ManyToMany
+    
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "etiquetaId")
     private List<Etiqueta> etiquetas;
     
     public Pendencia(){}
 
     
-    public Pendencia(Long pendenciaId, String nome, String descricao, boolean realizado, int prioridade) {
-        this.pendenciaId = pendenciaId;
+    public Pendencia(String nome, Usuario usuario, String descricao, int prioridade, Categoria categoria, List<Etiqueta> etiquetas) {
+        this.usuario = usuario;
         this.nome = nome;
         this.descricao = descricao;
-        this.realizado = realizado;
         this.prioridade = prioridade;
+        this.categoria = categoria;
+        this.etiquetas = etiquetas;
     }
 
     public Long getpendenciaId() {
@@ -104,4 +109,19 @@ public class Pendencia {
     public void setEtiquetas(List<Etiqueta> etiquetas) {
         this.etiquetas = etiquetas;
     }
+
+
+    @Override
+    public String toString() {
+        return "{" +
+            ", nome='" + getNome() + "'" +
+            ", descricao='" + getDescricao() + "'" +
+            ", realizado='" + isRealizado() + "'" +
+            ", prioridade='" + getPrioridade() + "'" +
+            ", usuario='" + getUsuario() + "'" +
+            ", categoria='" + getCategoria() + "'" +
+            ", etiquetas='" + getEtiquetas() + "'" +
+            "}";
+    }
+
 }

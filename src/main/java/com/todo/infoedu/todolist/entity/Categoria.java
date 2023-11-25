@@ -1,7 +1,6 @@
 package com.todo.infoedu.todolist.entity;
 
 import java.util.List;
-import java.util.UUID;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,6 +10,7 @@ import jakarta.persistence.OneToMany;
 
 @Entity
 public class Categoria {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long categoriaId;
@@ -25,6 +25,10 @@ public class Categoria {
         this.categoriaId = categoriaId;
         this.nome = nome;
         this.descricao = descricao;
+    }
+
+    public Categoria(String nome) {
+        this.nome = nome;
     }
 
     public Long getCategoriaId() {
